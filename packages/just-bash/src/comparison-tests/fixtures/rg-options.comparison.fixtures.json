@@ -6,7 +6,8 @@
     },
     "stdout": "1:const needle = true;\n",
     "stderr": "",
-    "exitCode": 0
+    "exitCode": 0,
+    "locked": true
   },
   "a77aaf255774eb23": {
     "command": "rg -- -needle input.txt",
@@ -15,6 +16,7 @@
     },
     "stdout": "-needle\n",
     "stderr": "",
-    "exitCode": 0
+    "exitCode": 0,
+    "locked": true
   }
 }

@@ -6,6 +6,9 @@ import {
   setupFiles,
 } from "./fixture-runner.js";
 
+// These fixtures are recorded from ripgrep and locked because the CI comparison
+// recorder does not install a host rg binary. Use RECORD_FIXTURES=force locally
+// with ripgrep installed to refresh them.
 describe("rg options - Real Bash Comparison", () => {
   let testDir: string;
 
