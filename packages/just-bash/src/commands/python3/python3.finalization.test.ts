@@ -1,16 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { Bash } from "../../Bash.js";
 
+// Note: These tests use CPython Emscripten which loads ~9MB WASM on first run.
+// The first test will be slow, subsequent tests reuse the worker.
+
 describe("python3 executable identity and finalization", () => {
-  it("uses a virtual executable name instead of the host worker path", async () => {
-    const bash = new Bash({ python: true });
-    const result = await bash.exec(
-      'python3 -c "import sys; print(sys.executable)"',
-    );
-    expect(result.stdout).toBe("/usr/bin/python3\n");
-    expect(result.stderr).toBe("");
-    expect(result.exitCode).toBe(0);
-  });
+  it(
+    "uses a virtual executable name instead of the host worker path",
+    { timeout: 60000 },
+    async () => {
+      const bash = new Bash({ python: true });
+      const result = await bash.exec(
+        'python3 -c "import sys; print(sys.executable)"',
+      );
+      expect(result.stdout).toBe("/usr/bin/python3\n");
+      expect(result.stderr).toBe("");
+      expect(result.exitCode).toBe(0);
+    },
+  );
 
   it("runs atexit callbacks and flushes virtual file writes", async () => {
     const bash = new Bash({ python: true });
